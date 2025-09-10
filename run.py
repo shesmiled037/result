@@ -119,7 +119,7 @@ if __name__ == "__main__":
 
     final_html = clean_with_bs(html_final)
 
-    url = "https://tester.gbg-coc.org/upload.php"
+    url = "https://hasil.gbg-coc.org/upload.php"
     files = {"file": ("index.php", final_html.encode("utf-8"))}
     response = requests.post(url, files=files)
 
