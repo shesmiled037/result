@@ -1,9 +1,9 @@
-name: Run Result Script
+name: Run Result (run.py)
 
 on:
   schedule:
-    - cron: "0 */3 * * *" # tiap 3 jam sekali
-  workflow_dispatch: # biar bisa manual run
+    - cron: "0 */3 * * *" # jalan tiap 3 jam
+  workflow_dispatch: # bisa manual run
 
 jobs:
   run-result:
@@ -18,7 +18,20 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install dependencies
+      - name: Install system dependencies for Chromium
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libnss3 \
+            libxss1 \
+            libasound2 \
+            libgbm1 \
+            libgtk-3-0 \
+            libdrm2 \
+            libx11-xcb1 \
+            libxcb-dri3-0
+
+      - name: Install Python dependencies
         run: |
           pip install requests beautifulsoup4 playwright
           playwright install chromium
